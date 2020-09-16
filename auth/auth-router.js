@@ -27,6 +27,7 @@ router.post("/register", (req, res) => {
 });
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
+  console.log(`users post /login`)
   if (isValid(req.body)) {
     Users.findBy({ username: username })
       .then(([user]) => {
@@ -40,6 +41,7 @@ router.post("/login", (req, res) => {
         }
       })
       .catch(error => {
+
         res.status(500).json({ message: error.message });
       });
   } else {
@@ -48,12 +50,12 @@ router.post("/login", (req, res) => {
     });
   }
 });
-function makeJwt({ id, username, role }) {
-  const payload = {
-    username,
-    role,
-    subject: id,
-  };
+function makeJwt(payload) {
+  // const payload = {
+  //   username,
+  //   role,
+  //   subject: id,
+  // };
   const config = {
     jwtSecret: process.env.JWT_SECRET || "is it secret, is it safe?",
   };

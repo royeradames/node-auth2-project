@@ -12,12 +12,21 @@ function find() {
 }
 
 function findBy(filter) {
-  return db("users as u")
+  console.log(`user model`)
+  console.log(`inside findBy`)
+  console.log(filter)
+  return db("users")
   .where(filter)
-  .orderBy("u.id")
-  .join('roles as r', 'r.id', 'u.role')
-  .select('u.id', 'u.username', 'u.password', 'r.name as role')
+  .orderBy("id")
+  .select('id','username', 'password','department')
 }
+// function findBy(filter) {
+//   return db("users as u")
+//   .where(filter)
+//   .orderBy("u.id")
+//   .join('roles as r', 'r.id', 'u.role')
+//   .select('u.id', 'u.username', 'u.password', 'r.name as role')
+// }
 
 async function add(user) {
   try {
