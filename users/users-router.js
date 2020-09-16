@@ -3,7 +3,7 @@ const router = require("express").Router();
 const Users = require("./users-model.js");
 const restricted = require("../auth/restricted-middleware.js");
 
-router.get("/", restricted, checkRole(1), (req, res) => {
+router.get("/", restricted, (req, res) => {
   Users.find()
     .then(users => {
       res.status(200).json(users);
@@ -17,9 +17,14 @@ function checkRole(role) {
   // otherwise return code 403
 
   return function (req, res, next) {
+    console.log(`inside checkRole`)
     if (req.jwt.role === role) {
+      console.log(`inside if`)
+
       next()
     } else {
+      console.log(`inside else`)
+
       res.status(403).json({ error: 'invalid request' })
     }
   }
