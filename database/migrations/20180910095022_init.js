@@ -17,7 +17,7 @@ exports.up = function (knex) {
         .onDelete("RESTRICT")
         .onUpdate("CASCADE")
       tbl
-        .string("department").index()
+        .string("department").index().notNullable()
     })
 }
 
