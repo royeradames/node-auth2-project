@@ -1,16 +1,26 @@
 exports.seed = function (knex) {
   // 000-cleanup.js already cleaned out all tables
 
-  const roles = [
+  const users = [
     {
-      name: "admin", // will get id 1
+      username: "admin", 
+      password: "admin", 
+      department: "admin", 
     },
     {
-      name: "user", // will get id 2
+      username: "royer", 
+      password: "two", 
+      department: "student", 
     },
+    {
+      username: "Austin", 
+      password: "three", 
+      department: "TL", 
+    },
+    
   ];
 
-  return knex("roles")
-    .insert(roles)
-    .then(() => console.log("\n== Seed data for roles table added. ==\n"));
+  return knex("users")
+    .insert(users)
+    .then(() => console.log("\n== Seed data for users table added. ==\n"));
 };
